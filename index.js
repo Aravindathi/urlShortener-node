@@ -25,7 +25,6 @@ app.post("/", async (req, res) => {
     if (err) {
       return res.status(404).send({ error: "Address not found" });
     }
- 
   const client = await createConnection();
   const result = await client
     .db("urlshortener")
@@ -42,8 +41,12 @@ app.post("/", async (req, res) => {
         returnOriginal: false,
         upsert: true,
       }
-    );
-    res.send(result)
+    );   
+    const data = await client
+    .db("urlshortener")
+    .collection("data")
+    .findOne({original_url: url})
+    res.send(data)
 });
 
 });
