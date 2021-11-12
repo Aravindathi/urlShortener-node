@@ -43,7 +43,7 @@ app.post("/", async (req, res) => {
         upsert: true,
       }
     );
-    res.send(result["short_id"])
+    res.send(result)
 });
 
 });
